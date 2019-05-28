@@ -1,6 +1,9 @@
 <template>
   <div>
     <!-- TODO: Add favorite-cities component to the template. Bind the favorites value to the favoriteCities property. -->
+    
+    <favorite-cities v-bind:favoriteCities="favorites">
+    </favorite-cities>
     <h2>City Search</h2>
     <message-container v-bind:messages="messages"></message-container>
     <form v-on:submit.prevent="getCities">
@@ -27,6 +30,7 @@ import WeatherSummary from '@/components/WeatherSummary';
 import WeatherData from '@/components/WeatherData';
 import CubeSpinner from '@/components/CubeSpinner';
 import MessageContainer from '@/components/MessageContainer';
+import FavoriteCities from '@/components/FavoriteCities';
 // TODO: Add Favorite Cities child component import statement here
 
 
@@ -36,7 +40,8 @@ export default {
     'weather-summary': WeatherSummary,
     'weather-data': WeatherData,
     'load-spinner': CubeSpinner,
-    'message-container': MessageContainer
+    'message-container': MessageContainer,
+    'favorite-cities': FavoriteCities
     // TODO: Add FavoriteCities child component here
   },
   data () {
@@ -55,7 +60,10 @@ export default {
   },
   methods: {
     saveCity: function (city) {
-      // TODO: Add logic to add the city to the this.favorites array and to add the city to the favoriteCities array
+      
+this.favorite.push(city);
+    this.$ls.set('favoriteCities',this.favorites);
+    // TODO: Add logic to add the city to the this.favorites array and to add the city to the favoriteCities array
 
     },
     getCities: function () {
